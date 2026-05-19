@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tug of War: Mathematics</title>
+    <link rel="stylesheet" href=".\style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Tug of War: Mathematics</h1>
+        <div id="timer">01:00</div>
+        <div style="width: 100px;"></div>
+    </header>
+
+    <div class="game-container">
+        <!-- Team 1 -->
+        <div class="player-panel team1">
+            <div class="panel-header">
+                <div class="team-badge" id="team1Label">User 1</div>
+                <div class="score-box" id="score1">0</div>
+            </div>
+            <div class="math-display">
+                <div class="equation" id="eqn1">0 + 0 = ?</div>
+                <div class="input-view" id="input1"></div>
+            </div>
+            <div class="keypad" data-team="1" id="keypad1">
+                <div class="key">1</div><div class="key">2</div><div class="key">3</div>
+                <div class="key">4</div><div class="key">5</div><div class="key">6</div>
+                <div class="key">7</div><div class="key">8</div><div class="key">9</div>
+                <div class="key clear">X</div><div class="key">0</div>
+            </div>
+        </div>
+
+        <!-- Tug of War Visual Field -->
+        <div class="center-field">
+            <div class="center-line"></div>
+            <div class="rope-container">
+                <div class="rope" id="ropeSystem">
+                    <div class="pullers">
+                        <div class="puller">🏃‍♂️</div>
+                        <div class="puller">🏃‍♀️</div>
+                    </div>
+                    <div class="rope-marker"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team 2 -->
+        <div class="player-panel team2">
+            <div class="panel-header">
+                <div class="score-box" id="score2">0</div>
+                <div class="team-badge" id="team2Label">User 2</div>
+            </div>
+            <div class="math-display">
+                <div class="equation" id="eqn2">0 + 0 = ?</div>
+                <div class="input-view" id="input2"></div>
+            </div>
+            <div class="keypad" data-team="2" id="keypad2">
+                <div class="key">1</div><div class="key">2</div><div class="key">3</div>
+                <div class="key">4</div><div class="key">5</div><div class="key">6</div>
+                <div class="key">7</div><div class="key">8</div><div class="key">9</div>
+                <div class="key clear">X</div><div class="key">0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode Selection Screen -->
+    <div class="overlay" id="startScreen">
+        <div class="modal">
+            <h2>Math Tug of War</h2>
+            <p>Solve math problems fast to pull the rope to your side! Choose your game mode:</p>
+            <div class="mode-buttons">
+                <button class="btn blue" onclick="setupGame('vsBot')">User vs Computer</button>
+                <button class="btn" onclick="setupGame('vsUser')">User vs User</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div class="overlay hidden" id="gameOverScreen">
+        <div class="modal">
+            <h2 id="winnerText">User 1 Wins!</h2>
+            <p id="finalScores">Score details here</p>
+            <button class="btn" onclick="returnToMenu()">Main Menu</button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
