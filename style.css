@@ -19,7 +19,9 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
 }
 
 header {
@@ -34,13 +36,13 @@ header {
 
 h1 {
     color: var(--dark-color);
-    font-size: 24px;
+    font-size: clamp(18px, 2.5vw, 28px);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 #timer {
-    font-size: 24px;
+    font-size: clamp(18px, 2.2vw, 26px);
     font-weight: bold;
     background: #fff;
     padding: 5px 15px;
@@ -51,7 +53,10 @@ h1 {
 .game-container {
     display: flex;
     flex: 1;
+    gap: 12px;
+    align-items: stretch;
     height: calc(100vh - 70px);
+    padding: 12px;
 }
 
 .player-panel {
@@ -98,9 +103,9 @@ h1 {
 
 .math-display {
     background: white;
-    width: 90%;
-    max-width: 320px;
-    padding: 20px;
+    width: 100%;
+    max-width: 360px;
+    padding: clamp(12px, 2.5vw, 22px);
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -108,16 +113,16 @@ h1 {
 }
 
 .equation {
-    font-size: 36px;
+    font-size: clamp(22px, 4.5vw, 40px);
     font-weight: bold;
     color: var(--dark-color);
     margin-bottom: 10px;
 }
 
 .input-view {
-    font-size: 28px;
+    font-size: clamp(18px, 3vw, 30px);
     font-weight: bold;
-    height: 45px;
+    height: 48px;
     border-bottom: 3px solid #bdc3c7;
     display: flex;
     justify-content: center;
@@ -131,21 +136,22 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    width: 90%;
-    max-width: 320px;
+    width: 100%;
+    max-width: 360px;
 }
 
 .key {
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 12px;
-    padding: 15px;
-    font-size: 24px;
+    padding: clamp(12px, 2.5vw, 18px);
+    font-size: clamp(18px, 3vw, 24px);
     font-weight: bold;
     cursor: pointer;
     text-align: center;
     transition: all 0.1s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    min-height: 48px;
 }
 
 .key:active {
@@ -166,7 +172,7 @@ h1 {
 
 /* Center Tug of War Field */
 .center-field {
-    width: 300px;
+    width: clamp(220px, 28vw, 360px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,7 +228,7 @@ h1 {
     position: absolute;
     display: flex;
     justify-content: space-between;
-    width: 140px;
+    width: clamp(120px, 24vw, 180px);
     top: -35px;
     left: 50%;
     transform: translateX(-50%);
@@ -248,24 +254,105 @@ h1 {
 
 .modal {
     background: white;
-    padding: 40px;
+    padding: clamp(18px, 3.5vw, 36px);
     border-radius: 20px;
     text-align: center;
-    max-width: 500px;
-    width: 90%;
+    max-width: 560px;
+    width: 92%;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 .modal h2 {
-    font-size: 32px;
+    font-size: clamp(20px, 3.8vw, 32px);
     margin-bottom: 20px;
     color: var(--dark-color);
 }
 
 .modal p {
-    font-size: 18px;
+    font-size: clamp(14px, 2.8vw, 18px);
     margin-bottom: 30px;
     color: #7f8c8d;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 900px) {
+    .game-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+    .player-panel {
+        width: 100%;
+        padding: 12px;
+    }
+    .center-field {
+        order: 2;
+        width: 100%;
+        max-width: 720px;
+        margin: 10px 0;
+    }
+    .player-panel.team1, .player-panel.team2 {
+        order: unset;
+    }
+    .panel-header {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 10px 14px;
+    }
+    h1 { font-size: clamp(16px, 4vw, 20px); }
+    .math-display { padding: 12px; }
+    .key { min-height: 54px; border-radius: 14px; }
+    .mode-buttons { flex-direction: column; gap: 12px; }
+    .btn { width: 100%; padding: 14px 18px; font-size: 18px; }
+    .modal { width: 95%; padding: 18px; }
+}
+
+@media (max-width: 480px) {
+    /* Make each player panel occupy full width and be touch-friendly */
+    .game-container {
+        padding: 8px;
+    }
+    .player-panel {
+        width: 100%;
+        flex: none;
+        padding: 12px 10px;
+        min-height: 220px;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+    .panel-header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    .team-badge {
+        padding: 6px 12px;
+        font-size: clamp(14px, 3.2vw, 16px);
+        border-radius: 18px;
+    }
+    .score-box {
+        font-size: clamp(20px, 5vw, 28px);
+        padding: 6px 12px;
+    }
+    .math-display {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+        padding: 12px;
+    }
+    .equation { font-size: clamp(20px, 7vw, 28px); }
+    .input-view { font-size: clamp(16px, 4.5vw, 22px); height: 44px; }
+    .keypad { max-width: 100%; gap: 8px; }
+    .key { font-size: 20px; padding: 14px; min-height: 56px; border-radius: 12px; }
+    .center-field { order: 2; margin: 8px 0; }
 }
 
 .mode-buttons {
